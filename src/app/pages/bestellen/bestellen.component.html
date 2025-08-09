@@ -1,1 +1,211 @@
-<p>bestellen works!</p>
+<header class="main-header">
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/bestellen">Bestellen</a></li>
+						<li><a href="/overdragen">Overdragen</a></li>
+						<li><a href="/vervoersgegevens">Vervoersgegevens</a></li>
+					</ul>
+				</nav>
+	<h1>Tickets bestellen</h1>
+</header>
+
+<div class="bestellen-container">
+	<div class="card">
+		<div class="row">
+			<div class="col">
+				<label for="eventSelect" class="label">Kies een event:</label>
+				<select id="eventSelect" (change)="selectEvent($event.target.value)">
+					<option value="" disabled selected>Kies een event</option>
+					<option *ngFor="let event of events" [value]="event.id">{{ event.name }}</option>
+				</select>
+			</div>
+			<div class="col" *ngIf="selectedEvent as event">
+				<h3>Beschikbare tickettypes</h3>
+				<div *ngFor="let type of event.ticketTypes" class="tickettype-row">
+					<span class="tickettype-name">{{ type.name }}</span>
+					<button (click)="addTicket(type)" [disabled]="!canAddTicket(type)">Voeg toe</button>
+					<span class="tickettype-count">({{ getTicketCount(type.id) }}/{{ type.max }})</span>
+				</div>
+			</div>
+		</div>
+
+		<div *ngIf="tickets.length > 0" class="tickets-table-wrapper">
+			<table class="tickets-table">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Email</th>
+						<th>Vervoerswijze</th>
+						<th>Woonplaats</th>
+						<th>Aankomsttijd</th>
+						<th>Vertrektijd</th>
+						<th>Drankbonnen</th>
+						<th>Maaltijdvouchers</th>
+						<th>Verwijder</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let ticket of tickets; let i = index">
+						<td>{{ ticket.ticketTypeName }}</td>
+						<td>
+							<input type="email" [(ngModel)]="ticket.holder.email" [class.invalid]="!isEmailUnique(ticket.holder.email, i) && ticket.holder.email">
+							<span *ngIf="!isEmailUnique(ticket.holder.email, i) && ticket.holder.email" class="error">Uniek e-mailadres vereist</span>
+						</td>
+						<td><input type="text" [(ngModel)]="ticket.holder.vervoerswijze"></td>
+						<td><input type="text" [(ngModel)]="ticket.holder.woonplaats"></td>
+						<td><input type="time" [(ngModel)]="ticket.holder.aankomsttijd"></td>
+						<td><input type="time" [(ngModel)]="ticket.holder.vertrektijd"></td>
+						<td><input type="number" min="0" [(ngModel)]="ticket.holder.drankbonnen"></td>
+						<td><input type="number" min="0" [(ngModel)]="ticket.holder.maaltijdvouchers"></td>
+						<td><button (click)="removeTicket(i)">Verwijder</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<style>
+.main-header {
+	background: linear-gradient(90deg, #222 60%, #444 100%);
+	color: #fff;
+	padding: 1.5em 0 1em 0;
+	margin-bottom: 2em;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.main-header h1 {
+	margin: 0.5em 0 0 0;
+	font-size: 2.2em;
+	letter-spacing: 1px;
+}
+.main-header nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	gap: 2em;
+}
+.main-header nav a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.1em;
+	padding: 0.2em 0.7em;
+	border-radius: 4px;
+	transition: background 0.2s, color 0.2s;
+}
+.main-header nav a.active, .main-header nav a:hover {
+	background: #ffb300;
+	color: #222;
+}
+.bestellen-container {
+	max-width: 900px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+.card {
+	background: #232323;
+	color: #fff;
+	border-radius: 16px;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+	padding: 2em 2.5em 2em 2.5em;
+	margin-top: 1em;
+	width: 100%;
+	max-width: 900px;
+}
+.row {
+	display: flex;
+	gap: 2em;
+	flex-wrap: wrap;
+	margin-bottom: 2em;
+}
+.col {
+	flex: 1 1 300px;
+	min-width: 250px;
+}
+.label {
+	font-size: 1.1em;
+	margin-bottom: 0.5em;
+	display: block;
+}
+select {
+	width: 100%;
+	padding: 0.5em;
+	margin-bottom: 1.5em;
+	border-radius: 6px;
+	border: 1px solid #888;
+	background: #fff;
+	color: #222;
+	font-size: 1em;
+}
+.tickettypes {
+	margin-bottom: 1.5em;
+}
+.tickettype-row {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	margin-bottom: 0.5em;
+}
+.tickettype-name {
+	flex: 1;
+}
+.tickettype-count {
+	color: #ffb300;
+	font-weight: bold;
+}
+.tickets-table-wrapper {
+	overflow-x: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #ffb300 #232323;
+}
+
+@media (min-width: 700px) {
+	.tickets-table-wrapper {
+		overflow-x: visible;
+	}
+}
+.tickets-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1em;
+	background: #fff;
+	color: #222;
+	border-radius: 8px;
+	overflow: hidden;
+}
+.tickets-table th, .tickets-table td {
+	border: 1px solid #ccc;
+	padding: 0.5em;
+	text-align: left;
+}
+.tickets-table th {
+	background: #f5f5f5;
+}
+.invalid {
+	border: 1px solid red;
+}
+.error {
+	color: red;
+	font-size: 0.9em;
+}
+button {
+	background: #ffb300;
+	color: #222;
+	border: none;
+	border-radius: 4px;
+	padding: 0.4em 1em;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+button:disabled {
+	background: #ccc;
+	color: #888;
+	cursor: not-allowed;
+}
+</style>
