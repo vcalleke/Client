@@ -60,8 +60,13 @@ export class BestellenComponent {
 
   selectedEvent: MyEvent | null = null;
   tickets: Ticket[] = [];
+  bestellerEmail: string = '';
+  orderSuccess: boolean = false;
+  orderNummer: string = '';
+  bevestigdeTickets: { ticketNummer: string, type: string, email: string }[] = [];
 
-  selectEvent(eventId: number) {
+  selectEvent(event: Event) {
+    const eventId = (event.target as HTMLSelectElement).value;
     this.selectedEvent = this.events.find(e => e.id === +eventId) || null;
     this.tickets = [];
   }
@@ -97,5 +102,32 @@ export class BestellenComponent {
 
   isEmailUnique(email: string, index: number): boolean {
     return this.tickets.filter((t, i) => t.holder.email === email && i !== index).length === 0;
+  }
+
+  getTotaalPrijs(): number {
+    // Voorbeeldprijzen per type, pas aan naar wens
+    const prijzen: { [key: number]: number } = {
+      1: 50, // Standaard
+      2: 120, // VIP
+      3: 60, // Regular
+      4: 150 // Premium
+    };
+    return this.tickets.reduce((sum, t) => sum + (prijzen[t.ticketTypeId] || 0), 0);
+  }
+
+  isOrderValid(): boolean {
+    // Alle e-mails moeten uniek en ingevuld zijn
+    return this.tickets.every((t, i) => t.holder.email && this.isEmailUnique(t.holder.email, i));
+  }
+
+  bestel() {
+    // Simuleer backend call en unieke nummers
+    this.orderNummer = 'ORD-' + Math.floor(Math.random() * 1000000);
+    this.bevestigdeTickets = this.tickets.map((t, i) => ({
+      ticketNummer: 'TCK-' + Math.floor(Math.random() * 1000000) + '-' + i,
+      type: t.ticketTypeName,
+      email: t.holder.email
+    }));
+    this.orderSuccess = true;
   }
 }
