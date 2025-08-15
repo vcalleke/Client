@@ -34,10 +34,10 @@ body {
   color: #363535;
 }
 .page-container button {
-  width: 100%;       /* knoppen vullen de breedte van container */
-  margin-bottom: 16px; /* ruimte tussen knoppen */
+  width: 100%;       
+  margin-bottom: 16px; 
 }
-/* Sectieblok */
+
 .section {
   padding: 24px;
   background-color: #d3d3d3;
@@ -48,7 +48,7 @@ body {
   gap: 16px;
 }
 
-/* Knoppengroep */
+
 .button-group {
   display: flex;
   flex-wrap: wrap;
@@ -57,7 +57,7 @@ body {
     justify-content: center;
 }
 
-/* Knoppen */
+
 .btn {
   padding: 10px 20px;
   border-radius: 8px;
@@ -78,7 +78,7 @@ body {
   transform: scale(1.02);
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   .page-container {
     padding: 20px;
