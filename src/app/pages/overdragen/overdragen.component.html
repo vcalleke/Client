@@ -1,1 +1,45 @@
-<p>overdragen works!</p>
+<header class="main-header">
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/bestellen">Bestellen</a></li>
+            <li><a href="/overdragen">Overdragen</a></li>
+            <li><a href="/vervoersgegevens">Vervoersgegevens</a></li>
+        </ul>
+    </nav>
+    <h1>Tickets overdragen</h1>
+</header>
+<div class="main-center-container">
+    <h2>Ticket overdragen</h2>
+
+    <p>
+        Vul de vereiste gegevens in om je ticket aan iemand anders over te dragen.
+    </p>
+
+    <div class="card">
+        <form (ngSubmit)="submitTransfer()">
+            <label>
+                Ticketnummer:
+                <input [(ngModel)]="ticketNumber" name="ticketNumber" required />
+            </label>
+            <label>
+                Jouw e-mailadres:
+                <input [(ngModel)]="fromEmail" name="fromEmail" required type="email" />
+            </label>
+            <label>
+                E-mailadres ontvanger:
+                <input [(ngModel)]="toEmail" name="toEmail" required type="email" />
+            </label>
+            <button type="submit">Overdragen</button>
+        </form>
+    </div>
+
+
+    <div *ngIf="transferSuccess" class="transfer-success-box">
+        <h3>Overdracht geslaagd!</h3>
+        <p>Je ticket is overgedragen aan {{ toEmail }}.</p>
+    </div>
+    <div *ngIf="transferError" class="transfer-error-msg">
+        {{ transferError }}
+    </div>
+</div>
