@@ -71,15 +71,15 @@ body, :host {
 .main-header {
   background: linear-gradient(90deg, #222 60%, #444 100%);
   color: #fff;
-  padding: 1.5em 0 1em 0;
-  margin-bottom: 2em;
+  padding: 24px 0 16px 0;
+  margin-bottom: 32px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .main-header h1 {
-  margin: 0.5em 0 0 0;
-  font-size: 2.2em;
+  margin: 8px 0 0 0;
+  font-size: 35px;
   letter-spacing: 1px;
 }
 
@@ -89,15 +89,15 @@ body, :host {
   margin: 0;
   display: flex;
   justify-content: center;
-  gap: 2em;
+  gap: 32px;
 }
 
 .main-header nav a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.1em;
-  padding: 0.2em 0.7em;
+  font-size: 18px;
+  padding: 3px 11px;
   border-radius: 4px;
   transition: background 0.2s, color 0.2s;
 }
@@ -116,7 +116,7 @@ body, :host {
   color: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-  padding: 2rem;
+  padding: 32px;
   min-width: 1500px;
   width: 100vw;
   max-width: 100vw;
@@ -127,7 +127,7 @@ body, :host {
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 32px;
 }
 .center-row {
   display: flex;
@@ -141,21 +141,21 @@ body, :host {
   min-width: 180px;
 }
 
+
 .label {
-  font-size: 1.1em;
-  margin-bottom: 0.5em;
+  font-size: 18px;
+  margin-bottom: 8px;
   display: block;
 }
-
-select {
+.select{
   width: 100%;
-  padding: 0.5em;
-  margin-bottom: 1.5em;
+  padding: 8px;
+  margin-bottom: 24px;
   border-radius: 6px;
   border: 1px solid #888;
   background: #fff;
   color: #222;
-  font-size: 1em;
+  font-size: 16px;
 }
 
 /* =========================
@@ -170,7 +170,7 @@ button {
   color: #222;
   border: none;
   border-radius: 4px;
-  padding: 0.4em 1em;
+  padding: 6px 16px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
@@ -187,7 +187,7 @@ button:disabled {
   color: #222;
   border: none;
   border-radius: 16px;
-  padding: 0.4em 1em;
+  padding: 6px 16px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s;
@@ -195,7 +195,7 @@ button:disabled {
   height: 175px;
   font-size: 40px;
   justify-content: center;
-margin: 80px auto;
+  margin: 80px auto;
   display: flex;
   align-items: center;
   text-align: center;
@@ -203,15 +203,16 @@ margin: 80px auto;
 /* =========================
    Tickets & Tables
 ========================= */
+
 .tickettypes {
-  margin-bottom: 1.5em;
+  margin-bottom: 24px;
 }
 
 .tickettype-row {
   display: flex;
   align-items: center;
-  gap: 1em;
-  margin-bottom: 0.5em;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
 .tickettype-name {
@@ -223,8 +224,9 @@ margin: 80px auto;
   font-weight: bold;
 }
 
+
 .tickets-table-wrapper {
-  margin-top: 2rem;
+  margin-top: 32px;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #ffb300 #232323;
@@ -240,7 +242,7 @@ margin: 80px auto;
   width: 100%;
   min-width: 900px;
   border-collapse: collapse;
-  background: transparent;
+   background: #ffffff;
   color: #000000;
   border-radius: 8px;
   overflow: hidden;
@@ -248,13 +250,13 @@ margin: 80px auto;
 
 .tickets-table th,
 .tickets-table td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #444;
+  padding: 12px 16px;
+  border-bottom: 1px solid #303030;
   color: #000000;
 }
 
 .tickets-table th {
-  background: #333;
+  background: #dfdfdf;
   color: #000000;
   font-weight: bold;
 }
@@ -266,9 +268,10 @@ margin: 80px auto;
   border: 1px solid red;
 }
 
+
 .error {
   color: red;
-  font-size: 0.9em;
+  font-size: 14px;
 }
 
 /* =========================
@@ -278,9 +281,40 @@ margin: 80px auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem 0;
+  padding: 32px 0;
   min-height: 100vh;
   background: transparent;
+}
+.complete-order {
+  text-align: center;
+  align-items: flex-start;
+  padding: 32px;
+  margin-top: 32px;
+  background: #ffb300;
+  border-radius: 4px;
+}
+.order {
+  width: 100%;
+  min-width: 450px;
+  border-collapse: collapse;
+   background: #ffffff;
+  color: #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+
+.order th,
+.order td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #303030;
+  color: #000000;
+}
+
+.order th {
+  background: #dfdfdf;
+  color: #000000;
+  font-weight: bold;
 }
 
 /* =========================

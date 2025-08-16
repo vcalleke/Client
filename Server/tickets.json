@@ -1,0 +1,38 @@
+[
+  {
+    "ticketTypeId": 4,
+    "ticketTypeName": "Premium",
+    "email": "test@test",
+    "vervoerswijze": "hehehe",
+    "woonplaats": "hehhee",
+    "aankomsttijd": "18:43",
+    "vertrektijd": "19:43",
+    "drankbonnen": 2,
+    "maaltijdvouchers": 2,
+    "ticketId": "685ee909-9c90-4024-b5bd-fb87c00cda90",
+    "vervoersgegevens": {
+      "vervoerswijze": "hehehe",
+      "woonplaats": "hehhee",
+      "aankomsttijd": "18:43",
+      "vertrektijd": "19:43"
+    }
+  },
+  {
+    "ticketTypeId": 2,
+    "ticketTypeName": "VIP",
+    "email": "joe@doe",
+    "vervoerswijze": "fff",
+    "woonplaats": "fff",
+    "aankomsttijd": "18:55",
+    "vertrektijd": "19:55",
+    "drankbonnen": 0,
+    "maaltijdvouchers": 0,
+    "ticketId": "c20270d3-4707-40e8-b91f-9cf464469b1c",
+    "vervoersgegevens": {
+      "vervoerswijze": "auto",
+      "woonplaats": "fff",
+      "aankomsttijd": "18:55",
+      "vertrektijd": "19:55"
+    }
+  }
+]

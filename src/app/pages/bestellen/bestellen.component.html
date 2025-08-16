@@ -1,4 +1,10 @@
- <header class="main-header">
+<!-- dit is de html van de pagina waarop ticketen bestelt worden
+Stap 1: Kies een event
+Stap 2: Kies tickettypes
+Stap 3: Vul besteller gegevens in
+Stap 4: Bevestiging
+-->
+<header class="main-header">
 				<nav>
 					<ul>
 						<li><a href="/">Home</a></li>
@@ -9,10 +15,10 @@
 				</nav>
 	<h1>Tickets bestellen</h1>
 </header>
-
 <div class="standard-container">
 	<div class="card">
 		<div class="row">
+			<!-- Stap 1: Kies een event -->
 			<div class="col">
 				<label for="eventSelect" class="label">Kies een event:</label>
 				<select id="eventSelect" (change)="selectEvent($event)">
@@ -22,30 +28,33 @@
 			</div>
 			<div class="col" *ngIf="selectedEvent as event">
 				<h3>Beschikbare tickettypes</h3>
+				<!-- Stap 2: Kies tickettypes -->
 				   <div *ngFor="let type of event.ticketTypes" class="tickettype-row">
 					   <span class="tickettype-name">{{ type.name }}</span>
 					   <button (click)="addTicket(type)" [disabled]="!canAddTicket(type)">Voeg toe</button>
 					   <span class="tickettype-count">({{ getTicketCount(type.id) }}/{{ type.max }})</span>
 				   </div>
 
-				   <!-- Stap 3: Besteller e-mail, totaalprijs en bestelknop ONDER de tabel -->
-				   <div *ngIf="tickets.length > 0 && !orderSuccess">
+				  
+					 <div *ngIf="tickets.length > 0 && !orderSuccess">
+						 <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
 					   <div class="totaalprijs-row" style="margin-top: 2rem;">
 						   <span class="totaal-label">Totaalprijs:</span>
 						   <span class="totaal-bedrag">€ {{ getTotaalPrijs() }}</span>
 					   </div>
 					   <div class="besteller-row">
+						<!-- Stap 3: Vul besteller gegevens in -->
 						   <label for="bestellerEmail">Jouw e-mailadres:</label>
 						   <input id="bestellerEmail" type="email" [(ngModel)]="bestellerEmail" required>
 						   <button (click)="bestel()" [disabled]="!bestellerEmail || !isOrderValid()">Bestellen</button>
 					   </div>
 				   </div>
 
-				<!-- Stap 4: Bevestiging -->
-				<div class="stap4" *ngIf="orderSuccess">
+				<!-- stap 4 Bevestiging -->
+				<div class="complete-order" *ngIf="orderSuccess">
 					<h2>Bestelling geslaagd!</h2>
 					<p>Je bestelnummer: <b>{{ orderNummer }}</b></p>
-					<table class="tickets-table">
+					<table class="order">
 						<thead>
 							<tr>
 								<th>Ticketnummer</th>
@@ -80,6 +89,7 @@
 						<th>Verwijder</th>
 					</tr>
 				</thead>
+				<!-- Stap 3: Vul besteller gegevens in -->
 				<tbody>
 					<tr *ngFor="let ticket of tickets; let i = index">
 						<td>{{ ticket.ticketTypeName }}</td>

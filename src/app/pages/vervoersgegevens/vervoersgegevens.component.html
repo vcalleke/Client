@@ -1,1 +1,54 @@
-<p>vervoersgegevens works!</p>
+<header class="main-header">
+	<nav>
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/bestellen">Bestellen</a></li>
+			<li><a href="/overdragen">Overdragen</a></li>
+			<li><a href="/vervoersgegevens">Vervoersgegevens</a></li>
+		</ul>
+	</nav>
+	<h1>Vervoersgegevens aanpassen</h1>
+</header>
+<div class="standard-container">
+    <div class="card">
+<div >
+		<h2>Ticketnummer ingeven</h2>
+		<form (ngSubmit)="ophalen()" *ngIf="!gegevens">
+			<label>
+				Ticketnummer:
+				<input [(ngModel)]="ticketnummer" name="ticketnummer" required />
+			</label>
+			<button type="submit" [disabled]="loading">Ophalen</button>
+		</form>
+		<div *ngIf="ophalenError" class="transfer-error-msg">{{ ophalenError }}</div>
+	</div>
+
+	<div  *ngIf="gegevens">
+		<h2>Vervoersgegevens aanpassen</h2>
+		<form (ngSubmit)="bijwerken()">
+			<label>
+				Vervoerswijze:
+				<input [(ngModel)]="gegevens.vervoerswijze" name="vervoerswijze" required />
+			</label>
+			<label>
+				Woonplaats:
+				<input [(ngModel)]="gegevens.woonplaats" name="woonplaats" required />
+			</label>
+			<label>
+				Geschatte aankomsttijd:
+				<input [(ngModel)]="gegevens.aankomsttijd" name="aankomsttijd" required type="time" />
+			</label>
+			<label>
+				Geschatte vertrektijd:
+				<input [(ngModel)]="gegevens.vertrektijd" name="vertrektijd" required type="time" />
+			</label>
+			<button type="submit">Bijwerken</button>
+		</form>
+		<div *ngIf="bijwerkenSuccess" class="transfer-success-box">
+			<h3>Gegevens bijgewerkt!</h3>
+		</div>
+		<div *ngIf="bijwerkenError" class="transfer-error-msg">{{ bijwerkenError }}</div>
+	</div>
+	</div>
+	
+</div>
