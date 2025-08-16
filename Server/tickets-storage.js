@@ -1,3 +1,4 @@
+// dit is het systeem dat de tickets opslaacht in tickets.json
 const fs = require('fs');
 const path = require('path');
 

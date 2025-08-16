@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+//dit wordt gebruikt om de vervoers gegevens via een API call aan te passen
 export interface VervoersGegevens {
   vervoerswijze: string;
   woonplaats: string;

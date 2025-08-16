@@ -22,7 +22,7 @@ export class VervoersgegevensComponent {
   loading: boolean = false;
 
   constructor(private ticketService: TicketService) {}
-
+//hier haal ik de vervoersgegevens op
   ophalen() {
     this.ophalenError = '';
     this.bijwerkenSuccess = false;
@@ -40,7 +40,7 @@ export class VervoersgegevensComponent {
       }
     });
   }
-
+// hier werk ik de gegevens bij
   bijwerken() {
     this.bijwerkenSuccess = false;
     this.bijwerkenError = '';

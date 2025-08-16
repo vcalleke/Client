@@ -1,4 +1,4 @@
-// Basis Express server voor event ticketing backend
+// Express backend voor ticketsysteem
 const express = require('express');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Dummy data voor events
+// Dummy data voor events (hier staan de events en tickettypes)
 let events = [
   {
     id: 'event1',
@@ -36,16 +36,15 @@ let events = [
   }
 ];
 
-// Endpoint: Lijst van alle toekomstige events
+// Haal alle events op
 app.get('/api/events', (req, res) => {
   res.json(events);
 });
 
-
-// Persistent opslag voor tickets
+// Laad tickets uit bestand zo blijven ze bewaard na restart
 let ticketsDB = loadTickets();
 
-// Endpoint: Bestelling registreren
+// Bestelling plaatsen: tickets opslaan en ordernummer + ticketnummers teruggeven
 app.post('/api/orders', (req, res) => {
   const { bestellerEmail, tickets } = req.body;
   if (!bestellerEmail || !Array.isArray(tickets) || tickets.length === 0) {
@@ -65,8 +64,8 @@ app.post('/api/orders', (req, res) => {
         vertrektijd: ticket.vertrektijd || ''
       }
     };
-  ticketsDB.push(newTicket);
-  saveTickets(ticketsDB);
+    ticketsDB.push(newTicket); // Ticket opslaan in array
+    saveTickets(ticketsDB);    // Tickets bewaren in bestand
     return newTicket;
   });
 
@@ -76,11 +75,10 @@ app.post('/api/orders', (req, res) => {
   });
 });
 
-// Endpoint: Haal ticket op via ticketnummer (accepteer prefix en suffix)
+// Ticket opzoeken op ticketnummer
 app.get('/api/tickets/:ticketId', (req, res) => {
-  // Sta toe dat ticketnummers met prefix en/of suffix (zoals TCK-xxxx-0) worden opgezocht
   let searchId = req.params.ticketId;
-  // Zoek naar een UUID in het ticketnummer (36 karakters, met streepjes)
+  // Haal echte uuid (ticketnummer) uit ticketnummer
   const match = searchId.match(/[a-f0-9\-]{36}/i);
   if (match) {
     searchId = match[0];
@@ -96,7 +94,7 @@ app.get('/api/tickets/:ticketId', (req, res) => {
   saveTickets(ticketsDB);
 });
 
-// Endpoint: Update vervoersgegevens van ticket (accepteer prefix en suffix)
+// Vervoersgegevens van ticket aanpassen
 app.put('/api/tickets/:ticketId', (req, res) => {
   let searchId = req.params.ticketId;
   const match = searchId.match(/[a-f0-9\-]{36}/i);
@@ -120,6 +118,7 @@ app.put('/api/tickets/:ticketId', (req, res) => {
   });
 });
 
+// Start de server
 app.listen(PORT, () => {
   console.log(`Server draait op http://localhost:${PORT}`);
 });

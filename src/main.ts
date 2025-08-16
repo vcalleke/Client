@@ -11,3 +11,4 @@ bootstrapApplication(AppComponent, {
     provideHttpClient()
   ],
 });
+//zorgt voor de juiste opstart van de applicatie

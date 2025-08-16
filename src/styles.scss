@@ -1,5 +1,6 @@
+//Alle styles van de hele app
 /* =========================
-   Global Styles
+   standard styles
 ========================= */
 body, :host {
   margin: 0;
@@ -15,7 +16,7 @@ body, :host {
   text-align: center;
 }
 /* =========================
-   Layout Containers
+   Layout Dingen
 ========================= */
 .app-header {
   background-color: #4a4a4a;
@@ -109,7 +110,7 @@ body, :host {
 }
 
 /* =========================
-   Content & Cards
+   Inhoud En de Card
 ========================= */
 .card {
   background: #222;
@@ -275,7 +276,7 @@ button:disabled {
 }
 
 /* =========================
-   Bestellen Specific
+   Bestellen Specifics (worden ook wel op andere paginas gebruikt maar voornamelijk op de betsellen pagina)
 ========================= */
 .bestellen-container {
   display: flex;
@@ -318,7 +319,7 @@ button:disabled {
 }
 
 /* =========================
-   Media Queries
+   Werkend voor andere schermen
 ========================= */
 @media (max-width: 600px) {
   .page-container {
