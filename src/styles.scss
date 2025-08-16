@@ -1,10 +1,22 @@
-/* Algemene container */
-body {
+/* =========================
+   Global Styles
+========================= */
+body, :host {
   margin: 0;
   padding: 0;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  background-color: #c4c2c2;
+  background: #c8c7c9 !important;
 }
+.bigcentertext {
+  font-size: 55px;
+  font-weight: 500;
+  color: #fdfdfd;
+  margin: 0px auto;
+  text-align: center;
+}
+/* =========================
+   Layout Containers
+========================= */
 .app-header {
   background-color: #4a4a4a;
   color: white;
@@ -12,10 +24,9 @@ body {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   border-radius: 20px;
-
 }
+
 .page-container {
   max-width: 1200px;
   margin: 200px auto;
@@ -25,17 +36,16 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-
-  font-size: 55px;
   gap: 32px;
   text-align: center;
+  font-size: 55px;
   font-weight: 500;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: #363535;
 }
+
 .page-container button {
-  width: 100%;       
-  margin-bottom: 16px; 
+  width: 100%;
+  margin-bottom: 16px;
 }
 
 .section {
@@ -48,37 +58,234 @@ body {
   gap: 16px;
 }
 
+.standard-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
 
-.button-group {
+/* =========================
+   Headers
+========================= */
+.main-header {
+  background: linear-gradient(90deg, #222 60%, #444 100%);
+  color: #fff;
+  padding: 1.5em 0 1em 0;
+  margin-bottom: 2em;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.main-header h1 {
+  margin: 0.5em 0 0 0;
+  font-size: 2.2em;
+  letter-spacing: 1px;
+}
+
+.main-header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}
+
+.main-header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 0.2em 0.7em;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.main-header nav a.active,
+.main-header nav a:hover {
+  background: #ffb300;
+  color: #222;
+}
+
+/* =========================
+   Content & Cards
+========================= */
+.card {
+  background: #222;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  padding: 2rem;
+  min-width: 1500px;
+  width: 100vw;
+  max-width: 100vw;
+  transition: width 0.3s, min-width 0.3s;
+  box-sizing: border-box;
+}
+
+.row {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 16px;
-    justify-content: center;
+  gap: 2rem;
+}
+.center-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 }
 
+.col {
+  flex: 1 1 0;
+  min-width: 180px;
+}
 
-.btn {
-  padding: 10px 20px;
-  border-radius: 8px;
+.label {
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+  display: block;
+}
+
+select {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1.5em;
+  border-radius: 6px;
+  border: 1px solid #888;
+  background: #fff;
+  color: #222;
+  font-size: 1em;
+}
+
+/* =========================
+   Buttons
+========================= */
+
+
+
+
+button {
+  background: #ffb300;
+  color: #222;
   border: none;
+  border-radius: 4px;
+  padding: 0.4em 1em;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  transition: background 0.2s;
+}
+
+button:disabled {
+  background: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.mpbutton {
+  background: #ffb300;
+  color: #222;
+  border: none;
+  border-radius: 16px;
+  padding: 0.4em 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 750px;
+  height: 175px;
   font-size: 40px;
+  justify-content: center;
+margin: 80px auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+/* =========================
+   Tickets & Tables
+========================= */
+.tickettypes {
+  margin-bottom: 1.5em;
 }
 
-.btn-primary {
-  background-color: #4a4a4a;
-  color: white;
+.tickettype-row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 0.5em;
 }
 
-.btn-primary:hover {
-  background-color: #2f2f2f;
-  transform: scale(1.02);
+.tickettype-name {
+  flex: 1;
 }
 
+.tickettype-count {
+  color: #ffb300;
+  font-weight: bold;
+}
 
+.tickets-table-wrapper {
+  margin-top: 2rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffb300 #232323;
+}
+
+@media (min-width: 700px) {
+  .tickets-table-wrapper {
+    overflow-x: visible;
+  }
+}
+
+.tickets-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  background: transparent;
+  color: #000000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tickets-table th,
+.tickets-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #444;
+  color: #000000;
+}
+
+.tickets-table th {
+  background: #333;
+  color: #000000;
+  font-weight: bold;
+}
+
+/* =========================
+   Validation & Errors
+========================= */
+.invalid {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+/* =========================
+   Bestellen Specific
+========================= */
+.bestellen-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 0;
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* =========================
+   Media Queries
+========================= */
 @media (max-width: 600px) {
   .page-container {
     padding: 20px;

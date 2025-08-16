@@ -1,23 +1,63 @@
 // Basis Express server voor event ticketing backend
 const express = require('express');
+const cors = require('cors');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
+app.use(cors());
 app.use(express.json());
 
-// Test route
-app.get('/', (req, res) => {
-  res.send('Event ticketing backend werkt!');
+// Dummy data voor events
+let events = [
+  {
+    id: 'event1',
+    name: 'Festival 2025',
+    ticketTypes: [
+      {
+        id: 'day',
+        name: 'Ticket Dag',
+        startDate: '2025-09-01',
+        endDate: '2025-09-01',
+        price: 50,
+        maxPerOrder: 4
+      },
+      {
+        id: 'combi',
+        name: 'Combiticket',
+        startDate: '2025-09-01',
+        endDate: '2025-09-03',
+        price: 120,
+        maxPerOrder: 2
+      }
+    ]
+  }
+];
+
+// Endpoint: Lijst van alle toekomstige events
+app.get('/api/events', (req, res) => {
+  res.json(events);
 });
 
-// Placeholder voor tickets API
-app.get('/api/tickets', (req, res) => {
-  res.json({ message: 'Hier komen de tickets.' });
-});
+// Endpoint: Bestelling registreren
+app.post('/api/orders', (req, res) => {
+  const { bestellerEmail, tickets } = req.body;
+  if (!bestellerEmail || !Array.isArray(tickets) || tickets.length === 0) {
+    return res.status(400).json({ error: 'Ongeldige bestelling' });
+  }
 
-// Placeholder voor vervoersgegevens API
-app.get('/api/transport', (req, res) => {
-  res.json({ message: 'Hier komen de vervoersgegevens.' });
+  const orderId = uuidv4();
+  const ticketsWithIds = tickets.map(ticket => ({
+    ...ticket,
+    ticketId: uuidv4()
+  }));
+
+  // Hier zou je normaal de bestelling opslaan in een database
+
+  res.json({
+    orderId,
+    tickets: ticketsWithIds
+  });
 });
 
 app.listen(PORT, () => {
